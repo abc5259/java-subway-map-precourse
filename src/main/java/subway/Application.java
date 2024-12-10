@@ -1,13 +1,21 @@
 package subway;
 
-import java.util.Scanner;
+import subway.controller.IteratorInputHandler;
+import subway.controller.IteratorInputTemplate;
+import subway.controller.SubwayController;
 import subway.init.SubwayInit;
+import subway.view.InputView;
+import subway.view.OutputView;
 
 public class Application {
     public static void main(String[] args) {
         SubwayInit subwayInit = new SubwayInit();
         subwayInit.init();
-        final Scanner scanner = new Scanner(System.in);
-        // TODO: 프로그램 구현
+        InputView inputView = new InputView();
+        OutputView outputView = new OutputView();
+        IteratorInputTemplate iteratorInputTemplate = new IteratorInputTemplate(outputView);
+        IteratorInputHandler iteratorInputHandler = new IteratorInputHandler(inputView, iteratorInputTemplate);
+        SubwayController subwayController = new SubwayController(inputView, outputView, iteratorInputHandler);
+        subwayController.process();
     }
 }
