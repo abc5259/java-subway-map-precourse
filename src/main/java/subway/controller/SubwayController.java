@@ -114,7 +114,8 @@ public class SubwayController {
             return;
         }
         if (command == INFO) {
-            
+            List<Line> allLines = lineService.findAllLines();
+            outputView.printLines(allLines);
             return;
         }
     }

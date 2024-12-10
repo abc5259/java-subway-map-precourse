@@ -1,5 +1,6 @@
 package subway.service;
 
+import java.util.List;
 import subway.domain.Line;
 import subway.domain.LineRepository;
 
@@ -21,5 +22,9 @@ public class LineService {
             throw new IllegalArgumentException("존재하지 않는 노선입니다.");
         }
         LineRepository.deleteLine(line);
+    }
+
+    public List<Line> findAllLines() {
+        return LineRepository.lines();
     }
 }
