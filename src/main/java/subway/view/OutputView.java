@@ -5,6 +5,7 @@ import subway.domain.Station;
 
 public class OutputView {
     private static final String ERROR_MESSAGE_FORMAT = "[ERROR] %s%n";
+    private static final String STATION_OUTPUT_HEADER = "## 역 목록";
     private static final String STATION_FORMAT = "[INFO] %s%n";
 
     private static final String MENU_LIST = "## 메인 화면\n"
@@ -19,11 +20,34 @@ public class OutputView {
     }
 
     public void printStations(List<Station> stations) {
+        System.out.println(STATION_OUTPUT_HEADER);
         stations.forEach(station -> System.out.printf(STATION_FORMAT, station.getName()));
         System.out.println();
     }
 
+    public void printAddStationMessage() {
+        printEmptyLine();
+        System.out.println("[INFO] 지하철 역이 등록되었습니다.");
+        printEmptyLine();
+    }
+
+    public void printRemoveStationMessage() {
+        printEmptyLine();
+        System.out.println("[INFO] 지하철 역이 삭제되었습니다.");
+        printEmptyLine();
+    }
+
     public void printErrorMessage(Exception exception) {
         System.out.printf(ERROR_MESSAGE_FORMAT, exception.getMessage());
+    }
+
+    public void printAddLineMessage() {
+        printEmptyLine();
+        System.out.println("[INFO] 지하철 노선이 등록되었습니다.");
+        printEmptyLine();
+    }
+
+    private void printEmptyLine() {
+        System.out.println();
     }
 }

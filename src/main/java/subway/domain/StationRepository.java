@@ -28,4 +28,8 @@ public class StationRepository {
     public static void addStations(List<Station> station) {
         stations.addAll(station);
     }
+
+    public static boolean existStations(List<Station> station) {
+        return stations.containsAll(station);
+    }
 }

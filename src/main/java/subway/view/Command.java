@@ -13,7 +13,7 @@ public enum Command {
 
     public static Command findCommand(String symbol) {
         return Arrays.stream(Command.values())
-                .filter(command -> command.symbol.equals(symbol))
+                .filter(command -> command.symbol != null && command.symbol.equals(symbol))
                 .findFirst()
                 .orElseThrow(() -> new IllegalArgumentException("선택할 수 없는 기능입니다."));
     }

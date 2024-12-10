@@ -1,6 +1,8 @@
 package subway.controller;
 
 
+import java.util.Arrays;
+import subway.domain.Line;
 import subway.domain.Station;
 import subway.view.Command;
 import subway.view.InputView;
@@ -26,6 +28,34 @@ public class IteratorInputHandler {
     public Station inputRemoveStation() {
         return iteratorInputTemplate.execute(
                 inputView::inputRemoveStation,
+                Station::new
+        );
+    }
+
+    public Line inputLine() {
+        String lineName = inputLineName();
+        Station upboundStation = inputUpboundStation();
+        Station downwardStation = inputDownwardStation();
+        return new Line(lineName, Arrays.asList(upboundStation, downwardStation));
+    }
+
+    private String inputLineName() {
+        return iteratorInputTemplate.execute(
+                inputView::inputLineName,
+                value -> value
+        );
+    }
+
+    private Station inputUpboundStation() {
+        return iteratorInputTemplate.execute(
+                inputView::inputUpboundStation,
+                Station::new
+        );
+    }
+
+    private Station inputDownwardStation() {
+        return iteratorInputTemplate.execute(
+                inputView::inputDownboundStation,
                 Station::new
         );
     }

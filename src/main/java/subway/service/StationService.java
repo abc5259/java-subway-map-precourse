@@ -31,4 +31,10 @@ public class StationService {
             throw new IllegalArgumentException("노선에 등록된 역은 삭제할 수 없습니다.");
         }
     }
+
+    public void validateExistStations(List<Station> stations) {
+        if (!StationRepository.existStations(stations)) {
+            throw new IllegalArgumentException("존재하지 않는 역입니다.");
+        }
+    }
 }

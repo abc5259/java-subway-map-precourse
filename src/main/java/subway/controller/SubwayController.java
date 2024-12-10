@@ -7,7 +7,9 @@ import static subway.view.Command.NONE;
 import static subway.view.Command.REMOVE;
 
 import java.util.List;
+import subway.domain.Line;
 import subway.domain.Station;
+import subway.service.LineService;
 import subway.service.StationService;
 import subway.view.Command;
 import subway.view.Menu;
@@ -18,13 +20,15 @@ public class SubwayController {
     private final OutputView outputView;
     private final IteratorInputHandler iteratorInputHandler;
     private final StationService stationService;
+    private final LineService lineService;
 
     public SubwayController(OutputView outputView,
                             IteratorInputHandler iteratorInputHandler,
-                            StationService stationService) {
+                            StationService stationService, LineService lineService) {
         this.outputView = outputView;
         this.iteratorInputHandler = iteratorInputHandler;
         this.stationService = stationService;
+        this.lineService = lineService;
     }
 
     public void process() {
@@ -65,6 +69,10 @@ public class SubwayController {
             processStation(subwayRequest.getCommand());
         }
 
+        if (subwayRequest.getMenu() == Menu.LINE) {
+            processLine(subwayRequest.getCommand());
+        }
+
         if (subwayRequest.getMenu() == Menu.QUIT) {
             return;
         }
@@ -74,18 +82,36 @@ public class SubwayController {
         if (command == ADD) {
             Station station = iteratorInputHandler.inputAddStation();
             stationService.addStation(station);
+            outputView.printAddStationMessage();
             return;
         }
 
         if (command == REMOVE) {
             Station station = iteratorInputHandler.inputRemoveStation();
             stationService.removeStation(station);
+            outputView.printRemoveStationMessage();
             return;
         }
 
         if (command == INFO) {
             List<Station> allStations = stationService.findAllStations();
             outputView.printStations(allStations);
+            return;
+        }
+    }
+
+    public void processLine(Command command) {
+        if (command == ADD) {
+            Line line = iteratorInputHandler.inputLine();
+            lineService.addLine(line);
+            outputView.printAddLineMessage();
+            return;
+        }
+        if (command == REMOVE) {
+            return;
+        }
+        if (command == INFO) {
+            return;
         }
     }
 }
