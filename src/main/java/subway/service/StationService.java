@@ -18,6 +18,10 @@ public class StationService {
         StationRepository.removeStation(station);
     }
 
+    public List<Station> findAllStations() {
+        return StationRepository.stations();
+    }
+
     private void validateRemoveStation(Station station) {
         List<Line> lines = LineRepository.lines().stream()
                 .filter(line -> line.containsStation(station))

@@ -2,9 +2,11 @@ package subway.controller;
 
 import static subway.view.Command.ADD;
 import static subway.view.Command.BACK;
+import static subway.view.Command.INFO;
 import static subway.view.Command.NONE;
 import static subway.view.Command.REMOVE;
 
+import java.util.List;
 import subway.domain.Station;
 import subway.service.StationService;
 import subway.view.Command;
@@ -79,6 +81,11 @@ public class SubwayController {
             Station station = iteratorInputHandler.inputRemoveStation();
             stationService.removeStation(station);
             return;
+        }
+
+        if (command == INFO) {
+            List<Station> allStations = stationService.findAllStations();
+            outputView.printStations(allStations);
         }
     }
 }
