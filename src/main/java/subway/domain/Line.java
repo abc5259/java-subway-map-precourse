@@ -1,5 +1,6 @@
 package subway.domain;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
@@ -15,6 +16,11 @@ public class Line {
         this.name = name.trim();
         this.stations = stations;
     }
+
+    public Line(String name) {
+        this(name, new ArrayList<>());
+    }
+
 
     private void validateName(String name) {
         if (name == null || name.trim().length() < MIN_NAME_LENGTH) {
@@ -50,5 +56,10 @@ public class Line {
     @Override
     public int hashCode() {
         return Objects.hashCode(getName());
+    }
+
+    @Override
+    public String toString() {
+        return getName();
     }
 }

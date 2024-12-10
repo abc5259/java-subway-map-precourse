@@ -108,9 +108,13 @@ public class SubwayController {
             return;
         }
         if (command == REMOVE) {
+            Line line = iteratorInputHandler.inputRemoveLine();
+            lineService.removeLine(line);
+            outputView.printRemoveLineMessage();
             return;
         }
         if (command == INFO) {
+            
             return;
         }
     }

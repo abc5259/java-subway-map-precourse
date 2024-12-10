@@ -47,6 +47,12 @@ public class OutputView {
         printEmptyLine();
     }
 
+    public void printRemoveLineMessage() {
+        printEmptyLine();
+        System.out.println("[INFO] 지하철 노선이 삭제되었습니다.");
+        printEmptyLine();
+    }
+
     private void printEmptyLine() {
         System.out.println();
     }

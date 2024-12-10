@@ -15,4 +15,11 @@ public class LineService {
         stationService.validateExistStations(line.getStations());
         LineRepository.addLine(line);
     }
+
+    public void removeLine(Line line) {
+        if (!LineRepository.lines().contains(line)) {
+            throw new IllegalArgumentException("존재하지 않는 노선입니다.");
+        }
+        LineRepository.deleteLine(line);
+    }
 }

@@ -35,7 +35,7 @@ public class SubwayInit {
                                 new Station("양재역"),
                                 new Station("매봉역"))
                         ),
-                        new Line("2호선", Arrays.asList(
+                        new Line("신분당선", Arrays.asList(
                                 new Station("강남역"),
                                 new Station("양재역"),
                                 new Station("양재시민의숲역"))

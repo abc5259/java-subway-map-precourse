@@ -39,10 +39,17 @@ public class IteratorInputHandler {
         return new Line(lineName, Arrays.asList(upboundStation, downwardStation));
     }
 
+    public Line inputRemoveLine() {
+        return iteratorInputTemplate.execute(
+                inputView::inputRemoveLine,
+                Line::new
+        );
+    }
+
     private String inputLineName() {
         return iteratorInputTemplate.execute(
                 inputView::inputLineName,
-                value -> value
+                name -> name
         );
     }
 
