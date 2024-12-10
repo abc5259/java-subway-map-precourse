@@ -77,12 +77,17 @@ public class SubwayController {
             processSection(subwayRequest.getCommand());
         }
 
+        if (subwayRequest.getMenu() == Menu.MAP) {
+            processMap();
+        }
+
         if (subwayRequest.getMenu() == Menu.QUIT) {
             return;
         }
     }
 
     public void processStation(Command command) {
+
         if (command == ADD) {
             Station station = iteratorInputHandler.inputAddStation();
             stationService.addStation(station);
@@ -138,5 +143,10 @@ public class SubwayController {
             lineService.removeLineSection(lineName, station);
             outputView.printRemoveLineStation();
         }
+    }
+
+    private void processMap() {
+        List<Line> allLines = lineService.findAllLines();
+        outputView.printMap(allLines);
     }
 }

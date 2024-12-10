@@ -74,6 +74,16 @@ public class OutputView {
         printEmptyLine();
     }
 
+    public void printMap(List<Line> lines) {
+        System.out.println("## 지하철 노선도");
+        lines.forEach(line -> {
+            System.out.printf(LINE_FORMAT, line.getName());
+            System.out.println("[INFO] ---");
+            line.getStations().forEach(station -> System.out.printf(STATION_FORMAT, station.getName()));
+            printEmptyLine();
+        });
+    }
+
     private void printEmptyLine() {
         System.out.println();
     }
