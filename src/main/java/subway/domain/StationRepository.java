@@ -16,8 +16,8 @@ public class StationRepository {
         stations.add(station);
     }
 
-    public static void addStations(List<Station> stations) {
-        stations.addAll(stations);
+    public static void addStations(List<Station> station) {
+        stations.addAll(station);
     }
 
     public static boolean deleteStation(String name) {
