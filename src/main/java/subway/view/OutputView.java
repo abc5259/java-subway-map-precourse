@@ -1,12 +1,15 @@
 package subway.view;
 
 import java.util.List;
+import subway.domain.Line;
 import subway.domain.Station;
 
 public class OutputView {
     private static final String ERROR_MESSAGE_FORMAT = "[ERROR] %s%n";
     private static final String STATION_OUTPUT_HEADER = "## 역 목록";
     private static final String STATION_FORMAT = "[INFO] %s%n";
+    private static final String LINE_OUTPUT_HEADER = "## 노선 목록";
+    private static final String LINE_FORMAT = "[INFO] %s%n";
 
     private static final String MENU_LIST = "## 메인 화면\n"
             + "1. 역 관리\n"
@@ -50,6 +53,18 @@ public class OutputView {
     public void printRemoveLineMessage() {
         printEmptyLine();
         System.out.println("[INFO] 지하철 노선이 삭제되었습니다.");
+        printEmptyLine();
+    }
+
+    public void printLines(List<Line> lines) {
+        System.out.println(LINE_OUTPUT_HEADER);
+        lines.forEach(line -> System.out.printf(LINE_FORMAT, line.getName()));
+        printEmptyLine();
+    }
+
+    public void printAddLineStation() {
+        printEmptyLine();
+        System.out.println("[INFO] 구간이 등록되었습니다.");
         printEmptyLine();
     }
 

@@ -25,4 +25,11 @@ public class LineRepository {
     public static void deleteLine(Line line) {
         lines.remove(line);
     }
+
+    public static Line findLineByName(String name) {
+        return lines.stream()
+                .filter(line -> line.isEqualName(name))
+                .findFirst()
+                .orElseThrow(() -> new IllegalArgumentException("해당 노선이 존재하지 않습니다."));
+    }
 }

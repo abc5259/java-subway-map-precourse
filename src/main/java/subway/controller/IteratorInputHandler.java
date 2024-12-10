@@ -1,7 +1,9 @@
 package subway.controller;
 
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import subway.converter.StringToIntConverter;
 import subway.domain.Line;
 import subway.domain.Station;
 import subway.view.Command;
@@ -36,7 +38,7 @@ public class IteratorInputHandler {
         String lineName = inputLineName();
         Station upboundStation = inputUpboundStation();
         Station downwardStation = inputDownwardStation();
-        return new Line(lineName, Arrays.asList(upboundStation, downwardStation));
+        return new Line(lineName, new ArrayList<>(Arrays.asList(upboundStation, downwardStation)));
     }
 
     public Line inputRemoveLine() {
@@ -46,10 +48,15 @@ public class IteratorInputHandler {
         );
     }
 
-    private String inputLineName() {
+    public String inputLineName() {
         return iteratorInputTemplate.execute(
                 inputView::inputLineName,
-                name -> name
+                name -> {
+                    if (name == null || name.isBlank()) {
+                        throw new IllegalArgumentException("이름을 입력하세요.");
+                    }
+                    return name;
+                }
         );
     }
 
@@ -84,6 +91,25 @@ public class IteratorInputHandler {
                     }
                     return command;
                 }
+        );
+    }
+
+    public String inputStationName() {
+        return iteratorInputTemplate.execute(
+                inputView::inputStationName,
+                name -> {
+                    if (name == null || name.isBlank()) {
+                        throw new IllegalArgumentException("이름을 입력하세요.");
+                    }
+                    return name;
+                }
+        );
+    }
+
+    public int inputLineStationNumber() {
+        return iteratorInputTemplate.execute(
+                inputView::inputLineStationNumber,
+                new StringToIntConverter()
         );
     }
 }

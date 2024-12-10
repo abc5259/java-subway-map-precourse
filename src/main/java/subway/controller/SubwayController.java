@@ -73,6 +73,10 @@ public class SubwayController {
             processLine(subwayRequest.getCommand());
         }
 
+        if (subwayRequest.getMenu() == Menu.SECTION) {
+            processSection(subwayRequest.getCommand());
+        }
+
         if (subwayRequest.getMenu() == Menu.QUIT) {
             return;
         }
@@ -114,8 +118,22 @@ public class SubwayController {
             return;
         }
         if (command == INFO) {
-            
+            List<Line> allLines = lineService.findAllLines();
+            outputView.printLines(allLines);
             return;
+        }
+    }
+
+    public void processSection(Command command) {
+        if (command == ADD) {
+            String lineName = iteratorInputHandler.inputLineName();
+            String stationName = iteratorInputHandler.inputStationName();
+            int lineStationNumber = iteratorInputHandler.inputLineStationNumber();
+            lineService.addLineStation(lineName, stationName, lineStationNumber);
+            outputView.printAddLineStation();
+        }
+        if (command == REMOVE) {
+
         }
     }
 }

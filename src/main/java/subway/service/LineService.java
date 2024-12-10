@@ -1,7 +1,9 @@
 package subway.service;
 
+import java.util.List;
 import subway.domain.Line;
 import subway.domain.LineRepository;
+import subway.domain.Station;
 
 public class LineService {
 
@@ -21,5 +23,16 @@ public class LineService {
             throw new IllegalArgumentException("존재하지 않는 노선입니다.");
         }
         LineRepository.deleteLine(line);
+    }
+
+    public List<Line> findAllLines() {
+        return LineRepository.lines();
+    }
+
+    public void addLineStation(String lineName, String stationName, int lineStationNumber) {
+        Station station = new Station(stationName);
+        stationService.validateExistStations(List.of(station));
+        Line line = LineRepository.findLineByName(lineName);
+        line.insertStation(station, lineStationNumber);
     }
 }

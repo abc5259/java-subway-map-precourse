@@ -21,6 +21,9 @@ public class Line {
         this(name, new ArrayList<>());
     }
 
+    public boolean isEqualName(String name) {
+        return this.name.equals(name);
+    }
 
     private void validateName(String name) {
         if (name == null || name.trim().length() < MIN_NAME_LENGTH) {
@@ -38,6 +41,25 @@ public class Line {
 
     public boolean containsStation(Station station) {
         return stations.contains(station);
+    }
+
+    public void insertStation(Station station, int number) {
+        if (stations.contains(station)) {
+            throw new IllegalArgumentException("이미 존재하는 역입니다.");
+        }
+
+        int index = number - 1;
+
+        if (stations.size() < index) {
+            throw new IllegalArgumentException("해당 구간에 역을 추가할 수 없습니다.");
+        }
+
+        if (stations.size() == index) {
+            stations.add(station);
+            return;
+        }
+
+        stations.add(index, station);
     }
 
     @Override
