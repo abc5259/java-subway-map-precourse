@@ -4,6 +4,7 @@ import subway.controller.IteratorInputHandler;
 import subway.controller.IteratorInputTemplate;
 import subway.controller.SubwayController;
 import subway.init.SubwayInit;
+import subway.service.StationService;
 import subway.view.InputView;
 import subway.view.OutputView;
 
@@ -15,7 +16,8 @@ public class Application {
         OutputView outputView = new OutputView();
         IteratorInputTemplate iteratorInputTemplate = new IteratorInputTemplate(outputView);
         IteratorInputHandler iteratorInputHandler = new IteratorInputHandler(inputView, iteratorInputTemplate);
-        SubwayController subwayController = new SubwayController(inputView, outputView, iteratorInputHandler);
+        StationService stationService = new StationService();
+        SubwayController subwayController = new SubwayController(outputView, iteratorInputHandler, stationService);
         subwayController.process();
     }
 }

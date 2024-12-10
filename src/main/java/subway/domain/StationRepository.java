@@ -13,6 +13,9 @@ public class StationRepository {
     }
 
     public static void addStation(Station station) {
+        if (stations.contains(station)) {
+            throw new IllegalArgumentException("이미 등록된 역입니다.");
+        }
         stations.add(station);
     }
 

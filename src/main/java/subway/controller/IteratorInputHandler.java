@@ -1,13 +1,12 @@
 package subway.controller;
 
 
+import subway.domain.Station;
 import subway.view.Command;
 import subway.view.InputView;
 import subway.view.Menu;
 
 public class IteratorInputHandler {
-
-    private static final int MAX_MENU_NUMBER = 4;
 
     private final InputView inputView;
     private final IteratorInputTemplate iteratorInputTemplate;
@@ -24,6 +23,20 @@ public class IteratorInputHandler {
         }
         Command command = inputCommand(menu);
         return new SubwayRequest(menu, command);
+    }
+
+    public Station inputAddStation() {
+        return iteratorInputTemplate.execute(
+                inputView::inputAddStation,
+                Station::new
+        );
+    }
+
+    public Station inputRemoveStation() {
+        return iteratorInputTemplate.execute(
+                inputView::inputAddStation,
+                Station::new
+        );
     }
 
     private Menu inputMenuNumber() {
