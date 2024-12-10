@@ -68,6 +68,12 @@ public class OutputView {
         printEmptyLine();
     }
 
+    public void printRemoveLineStation() {
+        printEmptyLine();
+        System.out.println("[INFO] 구간이 삭제되었습니다.");
+        printEmptyLine();
+    }
+
     private void printEmptyLine() {
         System.out.println();
     }

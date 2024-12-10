@@ -35,4 +35,11 @@ public class LineService {
         Line line = LineRepository.findLineByName(lineName);
         line.insertStation(station, lineStationNumber);
     }
+
+    public void removeLineSection(String lineName, String stationName) {
+        Station station = new Station(stationName);
+        stationService.validateExistStations(List.of(station));
+        Line line = LineRepository.findLineByName(lineName);
+        line.removeStation(station);
+    }
 }

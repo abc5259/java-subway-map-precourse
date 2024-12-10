@@ -15,6 +15,8 @@ public class InputView {
     private static final String INPUT_DOWNWARD_STATION_MESSAGE = "## 등록할 노선의 하행 종점역 이름을 입력하세요.";
     private static final String INPUT_REMOVE_LINE_MESSAGE = "## 삭제할 노선 이름을 입력하세요";
     private static final String INPUT_LINE_STATION_NUMBER = "## 순서를 입력하세요.";
+    private static final String INPUT_REMOVE_LINE_SECTION = "## 삭제할 구간의 노선을 입력하세요.";
+    private static final String INPUT_REMOVE_LINE_SECTION_STATION = "## 삭제할 구간의 역을 입력하세요.";
 
     public String inputMenu() {
         System.out.println();
@@ -75,6 +77,18 @@ public class InputView {
     public String inputLineStationNumber() {
         System.out.println();
         System.out.println(INPUT_LINE_STATION_NUMBER);
+        return readLine();
+    }
+
+    public String inputRemoveLineSection() {
+        System.out.println();
+        System.out.println(INPUT_REMOVE_LINE_SECTION);
+        return readLine();
+    }
+
+    public String inputRemoveLineSectionStation() {
+        System.out.println();
+        System.out.println(INPUT_REMOVE_LINE_SECTION_STATION);
         return readLine();
     }
 

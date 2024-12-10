@@ -112,4 +112,28 @@ public class IteratorInputHandler {
                 new StringToIntConverter()
         );
     }
+
+    public String inputRemoveLineSection() {
+        return iteratorInputTemplate.execute(
+                inputView::inputRemoveLineSection,
+                name -> {
+                    if (name == null || name.isBlank()) {
+                        throw new IllegalArgumentException("이름을 입력하세요.");
+                    }
+                    return name;
+                }
+        );
+    }
+
+    public String inputRemoveLineSectionStation() {
+        return iteratorInputTemplate.execute(
+                inputView::inputRemoveLineSectionStation,
+                name -> {
+                    if (name == null || name.isBlank()) {
+                        throw new IllegalArgumentException("이름을 입력하세요.");
+                    }
+                    return name;
+                }
+        );
+    }
 }

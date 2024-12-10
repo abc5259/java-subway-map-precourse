@@ -133,7 +133,10 @@ public class SubwayController {
             outputView.printAddLineStation();
         }
         if (command == REMOVE) {
-
+            String lineName = iteratorInputHandler.inputRemoveLineSection();
+            String station = iteratorInputHandler.inputRemoveLineSectionStation();
+            lineService.removeLineSection(lineName, station);
+            outputView.printRemoveLineStation();
         }
     }
 }

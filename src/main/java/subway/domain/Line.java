@@ -84,4 +84,16 @@ public class Line {
     public String toString() {
         return getName();
     }
+
+    public void removeStation(Station station) {
+        if (stations.size() == 2) {
+            throw new IllegalArgumentException("노선의 역에는 최소 2개의 역이 와야합니다.");
+        }
+
+        if (!stations.contains(station)) {
+            throw new IllegalArgumentException("존재하지 않는 역입니다.");
+        }
+
+        stations.remove(station);
+    }
 }
