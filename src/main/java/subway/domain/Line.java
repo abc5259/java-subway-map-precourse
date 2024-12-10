@@ -15,4 +15,8 @@ public class Line {
         return name;
     }
 
+    public boolean containsStation(Station station) {
+        return stations.contains(station);
+    }
+
 }

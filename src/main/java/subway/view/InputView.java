@@ -8,8 +8,10 @@ public class InputView {
 
     private static final String INPUT_MENU_MESSAGE = "## 원하는 기능을 선택하세요.";
     private static final String INPUT_ADD_STATION_MESSAGE = "## 등록할 역 이름을 입력하세요.";
+    private static final String INPUT_REMOVE_STATION_MESSAGE = "## 삭제할 역 이름을 입력하세요.";
 
     public String inputMenu() {
+        System.out.println();
         System.out.println(INPUT_MENU_MESSAGE);
         return readLine();
     }
@@ -17,11 +19,20 @@ public class InputView {
     public String inputCommand(Menu menu) {
         System.out.println();
         System.out.println(menu.getCommandMessage());
+        System.out.println();
+        System.out.println(INPUT_MENU_MESSAGE);
         return readLine();
     }
 
     public String inputAddStation() {
+        System.out.println();
         System.out.println(INPUT_ADD_STATION_MESSAGE);
+        return readLine();
+    }
+
+    public String inputRemoveStation() {
+        System.out.println();
+        System.out.println(INPUT_REMOVE_STATION_MESSAGE);
         return readLine();
     }
 

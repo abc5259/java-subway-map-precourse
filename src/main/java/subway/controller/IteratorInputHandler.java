@@ -16,15 +16,6 @@ public class IteratorInputHandler {
         this.iteratorInputTemplate = iteratorInputTemplate;
     }
 
-    public SubwayRequest inputSubwayRequest() {
-        Menu menu = inputMenuNumber();
-        if (menu.isNotExistCommand()) {
-            return new SubwayRequest(menu, Command.NONE);
-        }
-        Command command = inputCommand(menu);
-        return new SubwayRequest(menu, command);
-    }
-
     public Station inputAddStation() {
         return iteratorInputTemplate.execute(
                 inputView::inputAddStation,
@@ -34,19 +25,19 @@ public class IteratorInputHandler {
 
     public Station inputRemoveStation() {
         return iteratorInputTemplate.execute(
-                inputView::inputAddStation,
+                inputView::inputRemoveStation,
                 Station::new
         );
     }
 
-    private Menu inputMenuNumber() {
+    public Menu inputMenuNumber() {
         return iteratorInputTemplate.execute(
                 inputView::inputMenu,
                 Menu::findMenu
         );
     }
 
-    private Command inputCommand(Menu menu) {
+    public Command inputCommand(Menu menu) {
         return iteratorInputTemplate.execute(
                 () -> inputView.inputCommand(menu),
                 (value) -> {

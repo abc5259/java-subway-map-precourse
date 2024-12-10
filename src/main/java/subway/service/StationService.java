@@ -1,5 +1,9 @@
 package subway.service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+import subway.domain.Line;
+import subway.domain.LineRepository;
 import subway.domain.Station;
 import subway.domain.StationRepository;
 
@@ -7,5 +11,20 @@ public class StationService {
 
     public void addStation(Station station) {
         StationRepository.addStation(station);
+    }
+
+    public void removeStation(Station station) {
+        validateRemoveStation(station);
+        StationRepository.removeStation(station);
+    }
+
+    private void validateRemoveStation(Station station) {
+        List<Line> lines = LineRepository.lines().stream()
+                .filter(line -> line.containsStation(station))
+                .collect(Collectors.toUnmodifiableList());
+
+        if (!lines.isEmpty()) {
+            throw new IllegalArgumentException("노선에 등록된 역은 삭제할 수 없습니다.");
+        }
     }
 }

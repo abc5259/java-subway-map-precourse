@@ -2,6 +2,7 @@ package subway.controller;
 
 import static subway.view.Command.ADD;
 import static subway.view.Command.BACK;
+import static subway.view.Command.NONE;
 import static subway.view.Command.REMOVE;
 
 import subway.domain.Station;
@@ -26,20 +27,44 @@ public class SubwayController {
 
     public void process() {
 
-        SubwayRequest subwayRequest;
+        Menu menu;
         do {
             outputView.printMenuList();
-            subwayRequest = iteratorInputHandler.inputSubwayRequest();
-            if (subwayRequest.getCommand() == BACK) {
-                continue;
+            menu = iteratorInputHandler.inputMenuNumber();
+            iteratorExecuteRequest(menu);
+        } while (menu != Menu.QUIT);
+    }
+
+    private void iteratorExecuteRequest(Menu menu) {
+        while (true) {
+            try {
+                executeRequest(menu);
+                return;
+            } catch (IllegalArgumentException exception) {
+                outputView.printErrorMessage(exception);
             }
-            executeCommand(subwayRequest);
-        } while (subwayRequest.getMenu() != Menu.QUIT);
+        }
+    }
+
+    private void executeRequest(Menu menu) {
+        if (menu.isNotExistCommand()) {
+            executeCommand(new SubwayRequest(menu, NONE));
+            return;
+        }
+        Command command = iteratorInputHandler.inputCommand(menu);
+        if (command == BACK) {
+            return;
+        }
+        executeCommand(new SubwayRequest(menu, command));
     }
 
     private void executeCommand(SubwayRequest subwayRequest) {
         if (subwayRequest.getMenu() == Menu.STATION) {
             processStation(subwayRequest.getCommand());
+        }
+
+        if (subwayRequest.getMenu() == Menu.QUIT) {
+            return;
         }
     }
 
@@ -51,7 +76,9 @@ public class SubwayController {
         }
 
         if (command == REMOVE) {
-
+            Station station = iteratorInputHandler.inputRemoveStation();
+            stationService.removeStation(station);
+            return;
         }
     }
 }
